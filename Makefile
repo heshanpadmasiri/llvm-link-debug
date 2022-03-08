@@ -1,11 +1,11 @@
-export CFLAGS ?= -O2
+export CFLAGS
 
-all: runtime.ll
-	llvm-link-12 -o result.bc main.ll runtime.ll
+all: runtime_inline.bc
+	llvm-link-12 -o result.bc main.ll runtime_inline.bc
 
-runtime.ll: runtime.c
-	clang $(CFLAGS) -S -emit-llvm runtime.c
+runtime_inline.bc: runtime.h runtime_inline.c
+	clang $(CFLAGS) -O2 -emit-llvm runtime_inline.c -c -o runtime_inline.bc
 
 clean:
-	rm -rf runtime.ll
+	rm -rf runtime_inline.bc
 	rm -rf result.bc
