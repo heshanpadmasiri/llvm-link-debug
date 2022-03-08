@@ -1,3 +1,3 @@
-static inline int foo(int arg1, int arg2) {
+int foo(int arg1, int arg2) {
     return arg1 + arg2;
 }
